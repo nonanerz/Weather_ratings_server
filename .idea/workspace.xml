@@ -46,8 +46,8 @@
       <file leaf-file-name="login.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/pages/login.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+            <state relative-caret-position="-84">
+              <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -173,16 +173,6 @@
               <item name="Weather_ratings_server" type="b2602c69:ProjectViewProjectNode" />
               <item name="Weather_ratings_server" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Weather_ratings_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Weather_ratings_server" type="462c0819:PsiDirectoryNode" />
-              <item name="credentials" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Weather_ratings_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Weather_ratings_server" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -229,12 +219,12 @@
       <workItem from="1517579045772" duration="3865000" />
       <workItem from="1517631127486" duration="1286000" />
       <workItem from="1517643616662" duration="296000" />
-      <workItem from="1517733252739" duration="1462000" />
+      <workItem from="1517733252739" duration="1557000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11328000" />
+    <option name="totallyTimeSpent" value="11423000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -574,8 +564,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/pages/login.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+        <state relative-caret-position="-84">
+          <caret line="3" column="17" lean-forward="true" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
           <folding />
         </state>
       </provider>
