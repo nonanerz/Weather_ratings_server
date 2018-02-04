@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+<div class="login-container">
+    <% if(isAdmin === 'true'){ %>
+    <form class="form-container" action="/logout" method="POST">
+        <button class="submit-button">Logout</button>
+    </form>
+    <% } else{ %>
+    <h1 class="heading">Sign in</h1>
+    <form class="form-container" action="/login" method="POST">
+        <input type="text" placeholder="Name" name="name" class="login-input">
+        <input type="password" placeholder="password" name="password" class="login-input">
+        <button class="submit-button">Submit</button>
+    </form>
+    <% } %>
+</div>
+</body>
+</html>
