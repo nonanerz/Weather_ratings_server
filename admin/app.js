@@ -4,6 +4,7 @@ var passport = require('./auth');
 let bodyParser = require('body-parser')
 let cookieParser = require('cookie-parser')
 let expressSession = require('express-session')
+let Resource = require('../model/weather-resource/model')
 
 //Controllers
 var ratings = require('../routes/ratings');
@@ -23,8 +24,12 @@ admin.use(passport.session());
 admin.use(cookieParser('thisisagreatgreatsecretforthesession'));
 
 admin.get('/',
-    function(req, res) {
-        res.render('home', { user: req.user });
+   async function(req, res) {
+
+    let resources = await Resource.find({})
+        .then(result => result)
+    res.render('home', { user: req.user, resources});
+
     });
 
 admin.get('/login',
@@ -49,5 +54,17 @@ admin.get('/profile',
     function(req, res){
         res.render('profile', { user: req.user });
     });
+
+admin.post('/resources', function(req, res, next) {
+    if (req.user) {
+        require('connect-ensure-login').ensureLoggedIn(),
+            new Resource(req.body)
+                .save()
+                .then(res.redirect('/admin'))
+                .catch(next)
+    } else {
+        res.render('login');
+    }
+});
 
 module.exports = admin;

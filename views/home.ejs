@@ -2,4 +2,19 @@
 <p>Welcome! Please <a href="/admin/login">log in</a>.</p>
 <% } else { %>
 <p>Hello, <%= user.username %>. View your <a href="/admin/profile">profile</a>.</p>
+    <form action="/admin/resources" method="post">
+        <input type="text" name="title">
+        <input type="text" name="description">
+        <input type="url" name="url">
+        <input type="url" name="logoUrl">
+        <button type="submit">Save</button>
+    </form>
+
+    <ul>
+        <% resources.forEach(function(item){ %>
+        <li><%= item.title %> description: <%= item.description %> link: <%= item.url %></li>
+        <img src="<%= item.logoUrl %>">
+        <% }) %>
+    </ul>
 <% } %>
+
