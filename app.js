@@ -3,6 +3,7 @@ let path = require('path')
 let favicon = require('serve-favicon')
 let logger = require('morgan')
 let cookieParser = require('cookie-parser')
+var session = require('express-session')
 let bodyParser = require('body-parser')
 
 let index = require('./routes/index')
@@ -26,6 +27,11 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(session({
+    secret: 'work hard',
+    resave: true,
+    saveUninitialized: false
+}))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
