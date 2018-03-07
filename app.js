@@ -2,16 +2,15 @@ let express = require('express')
 let path = require('path')
 let favicon = require('serve-favicon')
 let logger = require('morgan')
-let cookieParser = require('cookie-parser')
-var session = require('express-session')
 let bodyParser = require('body-parser')
+var admin = require('./admin/app');
 
-let index = require('./routes/index')
 let users = require('./routes/users')
 let ratings = require('./routes/ratings')
 
 let app = express()
 let config = require('./config')
+app.use('/admin', admin); // mount the sub app
 
 require('./db')
 
@@ -19,23 +18,15 @@ app.listen(config.port, () => {
     console.log(`Server running at port: ${config.port}`)
 })
 app.use(bodyParser.json())
-app.use('/api/v1', ratings)
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
-app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
-app.use(session({
-    secret: 'work hard',
-    resave: true,
-    saveUninitialized: false
-}))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', index)
 app.use('/users', users)
+app.use('/ratings', ratings)
 
 app.use(function(req, res, next) {
   let err = new Error('Not Found')
