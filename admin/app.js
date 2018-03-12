@@ -27,6 +27,7 @@ admin.get('/',
    async function(req, res) {
 
     let resources = await Resource.find({})
+        .sort('-_id')
         .then(result => result)
     res.render('home', { user: req.user, resources});
 
@@ -62,6 +63,17 @@ admin.post('/resources', function(req, res, next) {
                 .save()
                 .then(res.redirect('/admin'))
                 .catch(next)
+    } else {
+        res.render('login');
+    }
+});
+
+admin.get('/resources/:id/remove', function(req, res, next) {
+    if (req.user) {
+        require('connect-ensure-login').ensureLoggedIn(),
+        Resource.remove({ _id: req.params.id }, function(err){
+            res.redirect('/admin')
+        })
     } else {
         res.render('login');
     }

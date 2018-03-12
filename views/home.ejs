@@ -1,20 +1,65 @@
-<% if (!user) { %>
-<p>Welcome! Please <a href="/admin/login">log in</a>.</p>
-<% } else { %>
-<p>Hello, <%= user.username %>. View your <a href="/admin/profile">profile</a>.</p>
-    <form action="/admin/resources" method="post">
-        <input type="text" name="title">
-        <input type="text" name="description">
-        <input type="url" name="url">
-        <input type="url" name="logoUrl">
-        <button type="submit">Save</button>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" />
+</head>
+<body>
+<div class="container">
+    <% if (!user) { %>
+    <p>Welcome! Please <a href="/admin/login">log in</a>.</p>
+    <% } else { %>
+    <div class="row">
+        <h1 class="col-lg-3">Hello admin!</h1>
 
-    <ul>
-        <% resources.forEach(function(item){ %>
-        <li><%= item.title %> description: <%= item.description %> link: <%= item.url %></li>
-        <img src="<%= item.logoUrl %>">
-        <% }) %>
-    </ul>
-<% } %>
+        <a href="/admin/logout">logout</a>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <p>Create new weather resource</p>
+            <form class="" action="/admin/resources" method="post">
+                <div class="form-group">
+                    <input  type="text" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <input  type="text" name="description" class="form-control" id="description" aria-describedby="description" placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <input  type="url" name="url" class="form-control" id="url" aria-describedby="url" placeholder="Url">
+                </div>
+                <div class="form-group">
+                    <input  type="url" name="logoUrl" class="form-control" id="logoUrl" aria-describedby="logoUrl" placeholder="Url to logo">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-lg-8">
+            <p>List of resources</p>
+            <% resources.forEach(function(item){ %>
+            <div class="card weather-card" style="margin-bottom: 10px">
+                <div class="card-body">
+                    <img style="height: 100px; width: auto" class="weather-img" src="<%= item.logoUrl %>" alt="weather image">
+                    <h5 class="card-title"><%= item.title %></h5>
+                    <p class="card-text"><%= item.description %></p>
+                    <p class="card-text"><%= item.url %></p>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="/admin/resources/<%= item.id %>/remove" class="btn btn-danger">Remove</a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <% } %>
+
+</div>
+
+</body>
+</html>
+
 
