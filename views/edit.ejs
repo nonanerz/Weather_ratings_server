@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" />
+</head>
+<body>
+<div class="container">
+    <% if (!user) { %>
+    <p>Welcome! Please <a href="/admin/login">log in</a>.</p>
+    <% } else { %>
+    <div class="row">
+        <h1 class="col-lg-3">Hello admin!</h1>
+
+        <a href="/admin/logout">logout</a>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <p>Edit resource</p>
+            <form class="" action="/admin/resources/<%= resource._id %>/edit" method="post">
+                <div class="form-group">
+                    <input  type="text" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Title" value=<%= resource.title %>>
+                </div>
+                <div class="form-group">
+                    <input  type="text" name="description" class="form-control" id="description" aria-describedby="description" placeholder="Description" value=<%= resource.description %>>
+                </div>
+                <div class="form-group">
+                    <input  type="url" name="url" class="form-control" id="url" aria-describedby="url" placeholder="Url" value=<%= resource.url %>>
+                </div>
+                <div class="form-group">
+                    <input  type="url" name="logoUrl" class="form-control" id="logoUrl" aria-describedby="logoUrl" placeholder="Url to logo" value=<%= resource.logoUrl %>>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="/admin/" class="btn btn-info">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <% } %>
+
+</div>
+
+</body>
+</html>
+
+
