@@ -1,15 +1,15 @@
-var express = require('express');
-var path = require('path');
-var passport = require('./auth');
+let express = require('express');
+let path = require('path');
+let passport = require('./auth');
 let bodyParser = require('body-parser')
 let cookieParser = require('cookie-parser')
 let expressSession = require('express-session')
 let Resource = require('../model/weather-resource/model')
 
 //Controllers
-var ratings = require('../routes/ratings');
+let ratings = require('../routes/ratings');
 
-var admin = express(); // the sub app
+let admin = express(); // the sub app
 admin.use(bodyParser.urlencoded({ extended: false }));
 admin.use(bodyParser.json());
 admin.use('/ratings', ratings);
