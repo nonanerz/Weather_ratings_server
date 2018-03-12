@@ -46,7 +46,7 @@
                     <img style="height: 100px; width: auto" class="weather-img" src="<%= item.logoUrl %>" alt="weather image">
                     <h5 class="card-title"><%= item.title %></h5>
                     <p class="card-text"><%= item.description %></p>
-                    <p class="card-text"><%= item.url %></p>
+                    <a href="<%= item.url %>" class="card-text"><%= item.url %></a><br />
                     <a href="#" class="btn btn-primary">Edit</a>
                     <a href="/admin/resources/<%= item.id %>/remove" class="btn btn-danger">Remove</a>
                 </div>
