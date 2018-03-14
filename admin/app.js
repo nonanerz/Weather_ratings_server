@@ -1,5 +1,4 @@
 let express = require('express')
-let path = require('path')
 let passport = require('./auth')
 let bodyParser = require('body-parser')
 let cookieParser = require('cookie-parser')
@@ -23,13 +22,16 @@ admin.use(passport.session())
 
 admin.use(cookieParser('thisisagreatgreatsecretforthesession'))
 
-admin.get('/',
-  async function (req, res) {
+admin.get('/', async function (req, res) {
+  if (req.user) {
     let resources = await Resource.find({})
       .sort('-_id')
       .then(result => result)
     res.render('home', { user: req.user, resources})
-  })
+  } else {
+    res.render('login', {user: req.user})
+  }
+})
 
 admin.get('/login',
   function (req, res) {
@@ -37,15 +39,15 @@ admin.get('/login',
   })
 
 admin.post('/login',
-  passport.authenticate('local', { failureRedirect: '/admin/login' }),
+  passport.authenticate('local', { failureRedirect: '/login' }),
   function (req, res) {
-    res.redirect('/admin')
+    res.redirect('/')
   })
 
 admin.get('/logout',
   function (req, res) {
     req.logout()
-    res.redirect('/admin/login')
+    res.redirect('/login')
   })
 
 admin.post('/resources', function (req, res, next) {
@@ -53,7 +55,7 @@ admin.post('/resources', function (req, res, next) {
     require('connect-ensure-login').ensureLoggedIn(),
     new Resource(req.body)
       .save()
-      .then(res.redirect('/admin'))
+      .then(res.redirect('/'))
       .catch(next)
   } else {
     res.render('login')
@@ -64,7 +66,7 @@ admin.get('/resources/:id/remove', function (req, res, next) {
   if (req.user) {
     require('connect-ensure-login').ensureLoggedIn(),
     Resource.remove({ _id: req.params.id }, function (err) {
-      res.redirect('/admin')
+      res.redirect('/')
     })
   } else {
     res.render('login')
@@ -86,7 +88,7 @@ admin.post('/resources/:id/edit', async function (req, res, next) {
   if (req.user) {
     require('connect-ensure-login').ensureLoggedIn(),
     Resource.findOneAndUpdate({ _id: req.params.id }, req.body, {upsert: true}, function (err, doc) {
-      res.redirect('/admin')
+      res.redirect('/')
     })
   } else {
     res.render('login', {user: req.user})

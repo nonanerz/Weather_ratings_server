@@ -9,19 +9,19 @@
 <body>
 <div class="container">
     <% if (!user) { %>
-    <p>Welcome! Please <a href="/admin/login">log in</a>.</p>
+    <p>Welcome! Please <a href="/login">log in</a>.</p>
     <% } else { %>
     <div class="row">
         <h1 class="col-lg-3">Hello admin!</h1>
 
-        <a href="/admin/logout">logout</a>
+        <a href="/logout">logout</a>
 
     </div>
 
     <div class="row">
         <div class="col-lg-4">
             <p>Create new weather resource</p>
-            <form class="" action="/admin/resources" method="post">
+            <form class="" action="/resources" method="post">
                 <div class="form-group">
                     <input required type="text" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Title">
                 </div>
@@ -47,8 +47,8 @@
                     <h5 class="card-title"><%= item.title %></h5>
                     <p class="card-text"><%= item.description %></p>
                     <a target="_blank" href="<%= item.url %>" class="card-text"><%= item.url %></a><br />
-                    <a href="/admin/resources/<%= item.id %>/edit" class="btn btn-primary">Edit</a>
-                    <a href="/admin/resources/<%= item.id %>/remove" class="btn btn-danger">Remove</a>
+                    <a href="/resources/<%= item.id %>/edit" class="btn btn-primary">Edit</a>
+                    <a href="/resources/<%= item.id %>/remove" class="btn btn-danger">Remove</a>
                 </div>
             </div>
             <% }) %>

@@ -9,19 +9,19 @@
 <body>
 <div class="container">
     <% if (!user) { %>
-    <p>Welcome! Please <a href="/admin/login">log in</a>.</p>
+    <p>Welcome! Please <a href="/login">log in</a>.</p>
     <% } else { %>
     <div class="row">
         <h1 class="col-lg-3">Hello admin!</h1>
 
-        <a href="/admin/logout">logout</a>
+        <a href="/logout">logout</a>
 
     </div>
 
     <div class="row">
         <div class="col-lg-4">
             <p>Edit resource</p>
-            <form class="" action="/admin/resources/<%= resource._id %>/edit" method="post">
+            <form class="" action="/resources/<%= resource._id %>/edit" method="post">
                 <div class="form-group">
                     <input  type="text" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Title" value=<%= resource.title %>>
                 </div>
@@ -35,7 +35,7 @@
                     <input  type="url" name="logoUrl" class="form-control" id="logoUrl" aria-describedby="logoUrl" placeholder="Url to logo" value=<%= resource.logoUrl %>>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <a href="/admin/" class="btn btn-info">Cancel</a>
+                <a href="/" class="btn btn-info">Cancel</a>
             </form>
         </div>
     </div>

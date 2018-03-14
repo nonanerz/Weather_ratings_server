@@ -11,7 +11,7 @@ let resources = require('./routes/weather-rating')
 
 let app = express()
 let config = require('./config')
-app.use('/admin', admin) // mount the sub app
+app.use('/', admin) // mount the sub app
 
 require('./db')
 
@@ -26,9 +26,9 @@ app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/users', users)
-app.use('/ratings', ratings)
-app.use('/resources', resources)
+app.use('/api/users', users)
+app.use('/api/ratings', ratings)
+app.use('/api/resources', resources)
 
 app.use(function (req, res, next) {
   let err = new Error('Not Found')
