@@ -2,34 +2,30 @@ const express = require('express')
 const Rating = require('../model/rating/model')
 const router = express.Router()
 
-router.get('/:id', async function (req, res, next) {
-  Rating.aggregate([
-    {
-      $match: {'resource': req.params.id, 'city': null}},
-    {
-      $group: {
-        _id: null,
-        average_transaction_amount: {
-          $avg: '$rating'
-        },
-
-        'count': { $sum: 1 }
-
-      }
-    }
-  ]).then(resources => {
-    res.json({resources})
+router.get('/', async function (req, res, next) {
+  Rating.find({}).then(rating => {
+    res.json({rating})
   })
     .catch(next)
 })
 
-router.post('/', (req, res, next) => {
-  new Rating(req.body)
-    .save()
-    .then(rating => {
-      res.json({rating})
-    })
-    .catch(next)
+router.post('/', async function (req, res, next) {
+  let rating = await Rating.findOne({'userId': req.body.userId, 'resource': req.body.resource})
+
+  if (rating) {
+    Rating.findOneAndUpdate({'userId': req.body.userId, 'resource': req.body.resource}, req.body)
+      .then(rating => {
+        res.json({rating})
+      })
+      .catch(next)
+  } else {
+    new Rating(req.body)
+      .save()
+      .then(rating => {
+        res.json({rating})
+      })
+      .catch(next)
+  }
 })
 
 module.exports = router
