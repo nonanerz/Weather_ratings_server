@@ -5,7 +5,8 @@ const resourceSchema = new mongoose.Schema({
   description: String,
   logoUrl: String,
   url: String,
-  rating: Object
+  rating: Object,
+  file: String
 })
 
 module.exports = mongoose.model('Resource', resourceSchema)

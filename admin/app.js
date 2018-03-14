@@ -4,11 +4,14 @@ let bodyParser = require('body-parser')
 let cookieParser = require('cookie-parser')
 let expressSession = require('express-session')
 let Resource = require('../model/weather-resource/model')
+const fileUpload = require('express-fileupload')
 
 // Controllers
 let ratings = require('../routes/ratings')
 
 let admin = express() // the sub app
+
+admin.use(fileUpload())
 admin.use(bodyParser.urlencoded({ extended: false }))
 admin.use(bodyParser.json())
 admin.use('/ratings', ratings)
@@ -51,8 +54,16 @@ admin.get('/logout',
   })
 
 admin.post('/resources', function (req, res, next) {
+  let path
+
+  if (req.files.file) {
+    path = './public/' + Math.floor(Math.random() * 100000) + req.files.file.name
+    req.body.file = path
+  }
   if (req.user) {
     require('connect-ensure-login').ensureLoggedIn(),
+    req.files.file.mv(path)
+
     new Resource(req.body)
       .save()
       .then(res.redirect('/'))
