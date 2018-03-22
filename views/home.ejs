@@ -32,11 +32,7 @@
                     <input  type="url" name="url" class="form-control" id="url" aria-describedby="url" placeholder="Url">
                 </div>
                 <div class="form-group">
-                    <input  type="url" name="logoUrl" class="form-control" id="logoUrl" aria-describedby="logoUrl" placeholder="Url to logo">
-                </div>
-
-                <div class="form-group">
-                    <input  type="file" name="file" class="form-control" id="file" aria-describedby="file" placeholder="file">
+                    <input  type="file" name="file" class="form-control" id="file" aria-describedby="file" placeholder="file" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -48,7 +44,7 @@
             <% resources.forEach(function(item){ %>
             <div class="card weather-card" style="margin-bottom: 10px">
                 <div class="card-body">
-                    <img style="height: 100px; width: auto" class="weather-img" src="<%= item.logoUrl %>" alt="weather image">
+                    <img style="height: 100px; width: auto" class="weather-img" src="<%= item.file %>" alt="weather image">
                     <h5 class="card-title"><%= item.title %></h5>
                     <p class="card-text"><%= item.description %></p>
                     <a target="_blank" href="<%= item.url %>" class="card-text"><%= item.url %></a><br />

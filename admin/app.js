@@ -9,7 +9,7 @@ const fileUpload = require('express-fileupload')
 // Controllers
 let ratings = require('../routes/ratings')
 
-let admin = express() // the sub app
+let admin = express()
 
 admin.use(fileUpload())
 admin.use(bodyParser.urlencoded({ extended: false }))
@@ -57,8 +57,9 @@ admin.post('/resources', function (req, res, next) {
   let path
 
   if (req.files.file) {
-    path = './public/' + Math.floor(Math.random() * 100000) + req.files.file.name
-    req.body.file = path
+    let randomNum = Math.floor(Math.random() * 100000)
+    path = 'public/' + randomNum + req.files.file.name
+    req.body.file = '/' + randomNum + req.files.file.name
   }
   if (req.user) {
     require('connect-ensure-login').ensureLoggedIn(),
@@ -96,8 +97,16 @@ admin.get('/resources/:id/edit', async function (req, res, next) {
 })
 
 admin.post('/resources/:id/edit', async function (req, res, next) {
+    let path
+
+    if (req.files.file) {
+        let randomNum = Math.floor(Math.random() * 100000)
+        path = 'public/' + randomNum + req.files.file.name
+        req.body.file = '/' + randomNum + req.files.file.name
+        req.files.file.mv(path)
+    }
   if (req.user) {
-    require('connect-ensure-login').ensureLoggedIn(),
+      require('connect-ensure-login').ensureLoggedIn(),
     Resource.findOneAndUpdate({ _id: req.params.id }, req.body, {upsert: true}, function (err, doc) {
       res.redirect('/')
     })

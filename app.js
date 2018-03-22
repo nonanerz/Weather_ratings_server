@@ -8,6 +8,7 @@ var admin = require('./admin/app')
 let users = require('./routes/users')
 let ratings = require('./routes/ratings')
 let resources = require('./routes/weather-rating')
+let comments = require('./routes/comments')
 
 let app = express()
 let config = require('./config')
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/api/users', users)
 app.use('/api/ratings', ratings)
 app.use('/api/resources', resources)
+app.use('/api/comments', comments)
 
 app.use(function (req, res, next) {
   let err = new Error('Not Found')
