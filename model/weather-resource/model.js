@@ -6,6 +6,7 @@ const resourceSchema = new mongoose.Schema({
   logoUrl: String,
   url: String,
   rating: Object,
+  commentsCount: String,
   file: String
 })
 
