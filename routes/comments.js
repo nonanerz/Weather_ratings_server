@@ -6,11 +6,13 @@ router.get('/:id', async function (req, res, next) {
     let page = req.query.page ? req.query.page : 1;
     let limit = req.query.limit ? req.query.limit : 5;
     let offset = (page - 1) * limit;
+    let count = await Comment.count({resource: req.params.id})
+        .then(count => count)
 
     Comment.find({resource: req.params.id}).limit(limit)
         .skip(offset)
         .then(comments => {
-            res.json({comments})
+            res.json({comments, count})
         })
         .catch(next)
 })
