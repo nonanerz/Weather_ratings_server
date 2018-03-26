@@ -10,6 +10,7 @@ router.get('/:id', async function (req, res, next) {
         .then(count => count)
 
     Comment.find({resource: req.params.id}).limit(limit)
+        .sort({ _id : 'descending'})
         .skip(offset)
         .then(comments => {
             res.json({comments, count})
