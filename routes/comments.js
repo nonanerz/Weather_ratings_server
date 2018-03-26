@@ -19,7 +19,9 @@ router.get('/:id', async function (req, res, next) {
 })
 
 router.post('/', async function (req, res, next) {
-  new Comment(req.body)
+    let data = req.body
+    data['createdAt'] = new Date()
+  new Comment(data)
     .save()
     .then(comment => {
       res.json({comment})
