@@ -4,18 +4,19 @@ const fs = require('fs')
 const path = require('path')
 const ejs = require('ejs')
 const nodeMailer = require('nodemailer')
+const emailCredentials = require('../config')
 
 router.post('/', function (req, res, next) {
   let transporter = nodeMailer.createTransport({
     service: 'Gmail',
     auth: {
-      user: 'weather.rate@gmail.com',
-      pass: '1234qwerasdfFFFF'
+      user: emailCredentials.email,
+      pass: emailCredentials.password
     }
   })
   fs.readFile(path.join(__dirname, '../views', 'email.ejs'), 'utf8', (err, data) => {
     if (err) {
-      return console.log(err)
+      return
     }
     let mailOptions = {
       from: `"Weather Rate" <weather.rate@gmail.com>`,
@@ -26,7 +27,6 @@ router.post('/', function (req, res, next) {
     }
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log(error)
         res.send('error')
       } else {
         res.json({response: info.response})
