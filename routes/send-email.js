@@ -22,7 +22,7 @@ router.post('/', function (req, res, next) {
       to: 'weather.rate@gmail.com, yarmolenko.dany@gmail.com, bulavaeduard@gmail.com',
       subject: 'Contact us',
       text: req.body.comment,
-      html: ejs.render(data, {name: req.body.name, email: req.body.email})
+      html: ejs.render(data, {name: req.body.name, email: req.body.email, comment: req.body.comment})
     }
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
