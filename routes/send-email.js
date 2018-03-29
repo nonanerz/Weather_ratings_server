@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const ejs = require('ejs')
 const nodeMailer = require('nodemailer')
-const emailCredentials = require('../config')
+const emailCredentials = require('../config/index')
 
 router.post('/', function (req, res, next) {
   let transporter = nodeMailer.createTransport({
