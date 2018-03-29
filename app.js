@@ -9,6 +9,7 @@ let users = require('./routes/users')
 let ratings = require('./routes/ratings')
 let resources = require('./routes/weather-rating')
 let comments = require('./routes/comments')
+let sendEmail = require('./routes/send-email')
 
 let app = express()
 let config = require('./config')
@@ -36,6 +37,7 @@ app.use('/api/users', users)
 app.use('/api/ratings', ratings)
 app.use('/api/resources', resources)
 app.use('/api/comments', comments)
+app.use('/api/send-email', sendEmail)
 
 app.use(function (req, res, next) {
   let err = new Error('Not Found')
