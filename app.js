@@ -5,7 +5,6 @@ let logger = require('morgan')
 let bodyParser = require('body-parser')
 var admin = require('./admin/app')
 
-let users = require('./routes/users')
 let ratings = require('./routes/ratings')
 let resources = require('./routes/weather-rating')
 let comments = require('./routes/comments')
@@ -33,7 +32,6 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/api/users', users)
 app.use('/api/ratings', ratings)
 app.use('/api/resources', resources)
 app.use('/api/comments', comments)
